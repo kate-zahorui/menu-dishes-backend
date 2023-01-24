@@ -1,0 +1,22 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type DishType {
+  id: Int!
+  title: String!
+  price: Int!
+}
+
+type Query {
+  dishes: [DishType!]!
+}
+
+type Mutation {
+  createDish(input: CreateDishDto!): DishType!
+}
+
+input CreateDishDto {
+  title: String!
+  price: Int!
+}
