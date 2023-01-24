@@ -3,7 +3,7 @@
 # ------------------------------------------------------
 
 type DishType {
-  id: Int!
+  id: String!
   title: String!
   price: Int!
 }

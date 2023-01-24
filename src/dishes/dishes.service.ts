@@ -1,16 +1,21 @@
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 import { CreateDishDto } from './dto/create-dish.dto';
+import { IDish } from './interfaces/dish.interface';
 
 @Injectable()
 export class DishesService {
-  private dishes = [];
+  constructor(@InjectModel('Dish') private readonly dishModel: Model<IDish>) {}
 
-  getAll() {
-    return this.dishes;
+  async getAll(): Promise<IDish[]> {
+    const allDishes = await this.dishModel.find();
+    return allDishes;
   }
 
-  create(dishDto: CreateDishDto) {
-    return this.dishes.push({ ...dishDto, id: Date.now().toString() });
+  async create(dishDto: CreateDishDto): Promise<IDish> {
+    const newDish = await this.dishModel.create(dishDto);
+    return newDish;
   }
 
   // removeById(id: string) {
